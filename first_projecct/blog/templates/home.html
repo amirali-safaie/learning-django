@@ -1,15 +1,12 @@
-<h1>hello world form html</h1>
-
-{% for name in names %}
-
-    <section>
-        <p>hello its me i was wonder...</p>
-        <h2>the name is {{name.name}}</h2>
-    </section>
-
-{% endfor %}
+<h1>hello its home page</h1>
 
 
-{% for family in familys %}
-    <h1>   family is {{family.family}}  </h1>
+
+{%for human in people %}
+
+    <p>his name is {{human.name}}</p>
+    <p>and his family is {{human.family}}</p>
+    <div></div>
+    <br>
+
 {% endfor %}

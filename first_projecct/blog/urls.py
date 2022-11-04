@@ -3,5 +3,12 @@ from .views import home
 
 app_name = "blog"
 urlpatterns = [
-    path('home/',home,name="home")
+    path('',home,name="home")
 ]
+
+
+
+
+
+
+
