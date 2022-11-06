@@ -7,7 +7,7 @@ from django.utils import timezone
 class Article(models.Model):
     STATUS_CHOICES=(
         ('d','draft'),
-        ("p",'published')
+        ("p",'publish')
     )
 
 
