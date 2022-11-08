@@ -6,11 +6,11 @@
 
 <center>
 
-      {%for human in post %}
-        <div class="" width="200">
-          <h2>{{human.title}}</h2>
-          <p></p>
-          <small>{{human.publish}}</small>
+      {%for post in posts %}
+        <div width="200">
+          <a href="/home/{{post.slug}}" >{{post.title}}</a>
+          <h2>{{post.title}}</h2>
+          <small>{{post.publish}}</small>
         </div>
           <br>
       {% endfor %}
