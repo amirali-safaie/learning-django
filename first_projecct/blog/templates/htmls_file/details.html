@@ -1,14 +1,37 @@
-<h1>show details on this page..</h1>
+{%extends 'htmls_file/base.html'%}
+
+{%block main%}
 
 
-<center>
 
-        <div class="" width="200">
-          <h2>{{post_detail.title}}</h2>
-          <p>{{post_detail.descriptions}}</p>
-          <small>{{post_detail.publish}}</small>
-        </div>
-          <br>
+      {%block title%} {{post_detail.title}} {%endblock%}
+<!-- ..........style bloc............. -->
+      {%block style%}
+      <style media="screen">
+      #cont{
+          background-color: #e1ecef;
+      }
+      </style>
+      {%endblock%}
+<!-- ..........style bloc............. -->
 
 
-</center>
+
+
+      <h1>show details on this page..</h1>
+
+
+      <center>
+
+              <div class="container"  id="cont" width="200">
+                <h2>{{post_detail.title}}</h2>
+                <p>{{post_detail.descriptions}}</p>
+                <small>{{post_detail.publish}}</small>
+              </div>
+                <br>
+
+
+      </center>
+
+
+{%endblock%}
