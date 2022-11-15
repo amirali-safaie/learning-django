@@ -15,12 +15,21 @@ class Article(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=100,unique=True)
     descriptions = models.TextField()
-    publish= models.DateField(default=timezone.now)
+    publish= models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1,choices=STATUS_CHOICES)
+
+    class Meta:
+        verbose_name = "مقاله"
+        verbose_name_plural = "مقالات"
 
 
     def __str__(self):
         return self.title
+
+    
+
 
 
 # class LogDelet(object):
