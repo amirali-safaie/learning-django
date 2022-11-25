@@ -2,9 +2,9 @@
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="{%url 'blog:home'%}">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="{%url 'account:logout_user' %}">logout</a></li>
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{%url "blog:home"%}">Blog</a></li>
         {%for cat in category%}
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">{{cat.title}}</a></li>
+        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{%url "blog:category" cat.slug %}">{{cat.title}}</a></li>
         {%endfor%}
     </ul>
 </div>

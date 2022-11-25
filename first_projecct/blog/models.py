@@ -4,6 +4,18 @@ from django.contrib.auth.models import User
 from extensions.utils import jalali_converter
 
 
+#make manager ...................
+
+class PostManager(models.Manager):
+    def published(self):
+        return self.filter(status="p")
+
+
+#make manager ...................
+
+
+
+
 #category class ...............
 class Category(models.Model):
 
@@ -34,7 +46,7 @@ class Article(models.Model):
     creator = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=100,unique=True)
-    category = models.ManyToManyField(Category)
+    category = models.ManyToManyField(Category,related_name="post_of_category")
     descriptions = models.TextField()
     publish= models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
@@ -45,18 +57,18 @@ class Article(models.Model):
     class Meta:
         ordering = ["-publish"]
 
-
-    # class Meta:
-    #     verbose_name = "مقاله"
-    #     verbose_name_plural = "مقالات"
-
     def jalali_get_publish(self):
          return jalali_converter(self.publish)
 
     jalali_get_publish.short_description = "date published"
 
+    def show_category(self):
+        return self.category.filter(status=True)
+
     def __str__(self):
         return self.title
+
+    objects = PostManager()
 #article class ................
 
     

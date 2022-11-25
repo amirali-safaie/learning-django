@@ -11,7 +11,7 @@
 
                     <!-- Nested row for non-featured blog posts-->
 
-                  {%for post in posts%}
+                  {%for post in category.post_of_category.published %}
 
 
                   <div class="card mb-3">
@@ -21,7 +21,7 @@
                           <h2 class="card-title h4">{{post.title}}</h2>
                           <p class="card-text">{{post.creator.first_name}}</p>
                           <p class="card-text">{{post.descriptions | truncatewords:10}}</p>
-                            {%for cat in post.show_category.all%}
+                            {%for cat in post.category.all%}
                             <p class="card-text">#{{cat.title}}</p>
                             {%endfor%}
                           <a class="btn btn-primary" href="{%url 'blog:details' post.slug%}">Read more →</a>
