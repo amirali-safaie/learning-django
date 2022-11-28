@@ -1,20 +1,26 @@
 from django.shortcuts import HttpResponse, render,get_object_or_404
 from django.http import HttpRequest
 from .models import Article,Category
+from django.core.paginator import Paginator
+from django.views.generic import ListView
 
 
 
 
 
 
-
-def home(request):
+def home(request,page=1):
     """this is a test for views"""
+    post_list = Article.objects.filter(status="p").order_by('publish')
+    pageinator = Paginator(post_list,5)
+    post = pageinator.get_page(page)
+    print(post.next_page_number)
     posts= {
-        "posts": Article.objects.filter(status="p").order_by('publish')
+        "posts": post
     }
 
     return render(request,"htmls_file/home.html",posts)
+
 
 
 

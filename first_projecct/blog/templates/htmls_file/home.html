@@ -41,6 +41,13 @@
                     <!-- Categories widget-->
                     <!-- Side widget-->
                 </div>
+                {% if posts.has_next %}
+                    <a class="btn btn-primary mb-3" href="{% url "blog:home"  posts.next_page_number%}"> new &rarr;</a>
+                {% endif %}
+
+                {% if posts.has_previous %}
+                <a class="btn btn-primary mb-3 ml-3" href="{% url "blog:home" posts.previous_page_number %}"> previous post &larr;</a>
+                {% endif %}
             </div>
         </div>
 {%endblock%}

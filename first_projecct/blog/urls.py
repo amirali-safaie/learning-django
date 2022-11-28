@@ -4,6 +4,7 @@ from .views import home,details,category
 app_name = "blog"
 urlpatterns = [
     path('',home,name="home"),
+    path('page/<int:page>',home,name="home"),
     path('post/<slug:slug>',details,name="details"),
     path('category/<slug:slug>',category,name="category")
 ]
