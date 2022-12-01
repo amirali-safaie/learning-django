@@ -20,7 +20,7 @@ admin.site.register(Article,ArticleAdmin)
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("title","slug",'status')
+    list_display = ("title","slug",'status','parent')
     list_filter = ('status',)
     search_fields = ('title',)
     prepopulated_fields = { 'slug': ('title',)}

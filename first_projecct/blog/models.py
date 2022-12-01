@@ -18,14 +18,14 @@ class PostManager(models.Manager):
 
 #category class ...............
 class Category(models.Model):
-
+    parent = models.ForeignKey("self",default=None,null=True,blank=True,on_delete=models.SET_NULL,related_name='children')
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=100,unique=True)
     status = models.BooleanField(default=True,verbose_name="show")
     position = models.IntegerField(verbose_name="order")
 
     class Meta:
-        ordering = ['position']
+        ordering = ['parent__id','position']
 
     def __str__(self):
         return self.title
