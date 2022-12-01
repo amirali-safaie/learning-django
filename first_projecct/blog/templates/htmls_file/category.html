@@ -12,7 +12,7 @@
 
                     <!-- Nested row for non-featured blog posts-->
 
-                  {%for post in category.post_of_category.published %}
+                  {%for post in posts %}
 
 
                   <div class="card mb-3">
@@ -42,6 +42,13 @@
                     <!-- Categories widget-->
                     <!-- Side widget-->
                 </div>
+            {% if posts.has_next %}
+                <a class="btn btn-primary mb-3" href="{% url "blog:category" category.slug  posts.next_page_number%}"> new &rarr;</a>
+            {% endif %}
+
+            {% if posts.has_previous %}
+            <a class="btn btn-primary mb-3 ml-3" href="{% url "blog:category" category.slug posts.previous_page_number %}"> previous post &larr;</a>
+            {% endif %}
             </div>
         </div>
 {%endblock%}

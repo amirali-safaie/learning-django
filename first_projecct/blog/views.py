@@ -37,10 +37,15 @@ def details(request,slug):
 
 
 
-def category(request,slug):
+def category(request,slug,page=1):
     """this is special page for each post realted to scecial category """
+    category = get_object_or_404(Category,slug=slug,status=True)
+    post_list = category.post_of_category.published()
+    pageinator = Paginator(post_list,5)
+    posts = pageinator.get_page(page)
     category_list= {
-        "category":get_object_or_404(Category,slug=slug,status=True)
+        "category":category,
+        "posts":posts
     }
     return render(request,"htmls_file/category.html",category_list)
 # Create your views here.
