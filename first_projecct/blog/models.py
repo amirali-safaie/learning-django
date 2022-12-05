@@ -10,6 +10,10 @@ class PostManager(models.Manager):
     def published(self):
         return self.filter(status="p")
 
+class categorytManager(models.Manager):
+    def active(self):
+        return self.filter(status=True)
+
 
 #make manager ...................
 
@@ -27,8 +31,12 @@ class Category(models.Model):
     class Meta:
         ordering = ['parent__id','position']
 
+    objects = categorytManager()
+
     def __str__(self):
         return self.title
+
+    objects = categorytManager()
 
 #category class ...............
 

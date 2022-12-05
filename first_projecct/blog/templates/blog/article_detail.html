@@ -1,4 +1,4 @@
-{%extends 'htmls_file/base.html'%}
+{%extends 'blog/base.html'%}
 
 
 {%block title%} {{post_detail.title}} {%endblock%}
@@ -24,10 +24,10 @@
       <center>
 
               <div class="container"  id="cont" width="200">
-                <h2>{{post_detail.title}}</h2>
-                <p>{{post_detail.descriptions | linebreaks}}</p>
-                <p>{{post_detail.category.title}}</p>
-                <p>{{post_detail.jalali_get_publish}}</p>
+                <h2>{{object.title}}</h2>
+                <p>{{object.descriptions | linebreaks}}</p>
+                <p>{{object.category.title}}</p>
+                <p>{{object.jalali_get_publish}}</p>
 
               </div>
                 <br>

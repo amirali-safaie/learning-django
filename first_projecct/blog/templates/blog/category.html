@@ -1,8 +1,9 @@
-{%extends 'htmls_file/base.html'%}
+{%extends 'blog/base.html'%}
 
 
 {%block main%}
         <!-- Page content-->
+        <h2>work work work</h2>
         <div class="container">
             <div class="row">
                 <!-- Blog entries-->
@@ -11,8 +12,8 @@
                     <!-- Featured blog post-->
 
                     <!-- Nested row for non-featured blog posts-->
-
-                  {%for post in posts %}
+                    <h2>work work work</h2>
+                  {%for post in object_list %}
 
 
                   <div class="card mb-3">
@@ -25,7 +26,7 @@
                             {%for cat in post.category.all%}
                             <p class="card-text">#{{cat.title}}</p>
                             {%endfor%}
-                          <a class="btn btn-primary" href="{%url 'blog:details' post.slug%}">Read more →</a>
+                          <a class="btn btn-primary" href="{%url 'blog:Details' post.slug%}">Read more →</a>
                       </div>
                   </div>
 
@@ -42,12 +43,12 @@
                     <!-- Categories widget-->
                     <!-- Side widget-->
                 </div>
-            {% if posts.has_next %}
-                <a class="btn btn-primary mb-3" href="{% url "blog:category" category.slug  posts.next_page_number%}"> new &rarr;</a>
+            {% if page_obj.has_next %}
+                <a class="btn btn-primary mb-3" href="{% url "blog:category" category.slug  page_obj.next_page_number%}"> new &rarr;</a>
             {% endif %}
 
-            {% if posts.has_previous %}
-            <a class="btn btn-primary mb-3 ml-3" href="{% url "blog:category" category.slug posts.previous_page_number %}"> previous post &larr;</a>
+            {% if page_obj.has_previous %}
+            <a class="btn btn-primary mb-3 ml-3" href="{% url "blog:category" category.slug page_obj.previous_page_number %}"> previous post &larr;</a>
             {% endif %}
             </div>
         </div>

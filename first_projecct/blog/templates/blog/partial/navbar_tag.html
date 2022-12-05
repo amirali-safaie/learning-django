@@ -7,8 +7,8 @@
             {%if cat.parent == None%}
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{%url "blog:category" cat.slug %}">{{cat.title}}</a>
-                    {%if cat.children.all%}
-                        {% include "htmls_file/partial/category_loop.html" %}
+                    {%if cat.children.active%}
+                        {% include "blog/partial/category_loop.html" %}
                     {%endif%}
                 </li>
             {%endif%}
