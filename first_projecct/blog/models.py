@@ -22,6 +22,7 @@ class categorytManager(models.Manager):#درست کردن منیجیر برای 
 
 #category class ...............
 class Category(models.Model):
+    """مدل کتگوری ها """
     parent = models.ForeignKey("self",default=None,null=True,blank=True,on_delete=models.SET_NULL,related_name='children')
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=100,unique=True)
@@ -49,7 +50,7 @@ class Article(models.Model):
         ("p",'publish')
     )
 
-    creator = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    author = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,related_name="posts_of_author")# اختصاص دادن یک نویسدنده برای پست
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=100,unique=True)
     category = models.ManyToManyField(Category,related_name="post_of_category")

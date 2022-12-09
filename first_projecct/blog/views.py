@@ -1,6 +1,7 @@
 from django.shortcuts import HttpResponse, render,get_object_or_404
 from django.http import HttpRequest
 from .models import Article,Category
+from django.contrib.auth.models import User
 from django.views.generic import ListView,DetailView
 from django.core.paginator import Paginator
 from django.views.generic import ListView
@@ -12,9 +13,6 @@ from django.views.generic import ListView
 class home(ListView):
     queryset = Article.objects.published()
     paginate_by = 5
-
-
-
 
 #home functionbase...........///////////////////////////////////////////////
 # def home(request,page=1):
@@ -53,7 +51,7 @@ class Details(DetailView):
 
 
 class Category_list(ListView):
-    paginate_by = 3
+    paginate_by = 5  # """پیچ انیشین صفجه کتگوری"""
     template_name = "blog/category.html"
 
     def get_queryset(self):
@@ -66,6 +64,26 @@ class Category_list(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["category"] = category
+        return context
+
+
+
+
+
+class author_list(ListView):
+    paginate_by = 5  # """پیچ انیشین صفجه کتگوری"""
+    template_name = "blog/author_list.html"   #نشان دادن این ویو بر روی این تمپلیت
+
+    def get_queryset(self):
+        global author
+        username = self.kwargs.get("username") 
+        author = get_object_or_404(User,username=username) #گرفتن یوزر هایی که یوزرنیمشون رو وارد میکنیم
+        return author.posts_of_author.published()#گرفتن پست های اون نویسنده(یوزر)
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["author"] = author
         return context
     
 

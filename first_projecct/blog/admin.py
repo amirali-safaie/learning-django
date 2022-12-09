@@ -13,8 +13,12 @@ def make_publish(modeladmin,request,queryset):
     modeladmin.message_user(request,"%s " %message_bit)
 
 
+
+
+
 @admin.action(description="make post draft")
 def make_draf(modeladmin,request,queryset):
+    """اکشن پیش نویس کردن پست"""
     queryset.update(status='d')
     rows_update = queryset.update(status='d')
     if rows_update == 1:
@@ -29,6 +33,7 @@ def make_draf(modeladmin,request,queryset):
 
 @admin.action(description="make category deactive")
 def make_deactive(modeladmin,request,queryset):
+    """اکشن غیرفال کردن کتگوری"""
     queryset.update(status=False)
 
 
@@ -41,7 +46,7 @@ def make_active(modeladmin,request,queryset):
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ("title","slug",'jalali_get_publish','status','category_to_str')
+    list_display = ("title","slug",'jalali_get_publish',"author",'status','category_to_str')
     list_filter = ('publish','status')
     search_fields = ('title','descriptions')
     prepopulated_fields = { 'slug': ('title',)}

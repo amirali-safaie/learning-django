@@ -1,0 +1,15 @@
+{%extends 'blog/base_list.html'%}
+
+{% comment %} این صفحه برای نمایش پست های یک کتگوری خاص است {% endcomment %}
+
+
+{%block url_next%}
+    {% url "blog:author" author.username  page_obj.next_page_number%}      {% comment %} این یو ار ال برای پیش انییشن کتگوری است{% endcomment %}
+{%endblock%}
+
+
+
+
+{%block url_previous%}
+    {% url "blog:author" author.username  page_obj.previous_page_number%}
+{%endblock%}

@@ -33,6 +33,7 @@
                             {%for cat in post.category.active%}
                             <a href='{%url "blog:category" cat.slug%}'><p class="card-text">#{{cat.title}}</p></a> <br>
                             {%endfor%}
+                            <a href='{%url "blog:author" post.author%}'><p class="card-text">{{post.author.get_full_name}}</p></a> <br>
                           <a class="btn btn-primary" href="{%url 'blog:Details' post.slug%}">Read more →</a>
                       </div>
                   </div>
