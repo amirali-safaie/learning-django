@@ -6,11 +6,11 @@ from extensions.utils import jalali_converter
 
 #make manager ...................
 
-class PostManager(models.Manager):
+class PostManager(models.Manager): #درست کردن منیجیر برای نمایش مقاله های پابلیش
     def published(self):
         return self.filter(status="p")
 
-class categorytManager(models.Manager):
+class categorytManager(models.Manager):#درست کردن منیجیر برای نمایش دسته بندی  های فعال
     def active(self):
         return self.filter(status=True)
 
@@ -30,8 +30,6 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['parent__id','position']
-
-    objects = categorytManager()
 
     def __str__(self):
         return self.title
@@ -71,7 +69,7 @@ class Article(models.Model):
     jalali_get_publish.short_description = "date published"
 
     def show_category(self):
-        return self.category.filter(status=True)
+        return self.category.active()
 
     def __str__(self):
         return self.title

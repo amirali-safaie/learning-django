@@ -1,55 +1,20 @@
-{%extends 'blog/base.html'%}
+{%extends 'blog/base_list.html'%}
+
+{% comment %} این صفحه برای نمایش پست های یک کتگوری خاص است {% endcomment %}
 
 
-{%block main%}
-        <!-- Page content-->
-        <h2>work work work</h2>
-        <div class="container">
-            <div class="row">
-                <!-- Blog entries-->
-                <div class="col-lg-8">
-                    {% comment %} <h3 class="alert alert-primary">{{category.title}}</h3> {% endcomment %}
-                    <!-- Featured blog post-->
-
-                    <!-- Nested row for non-featured blog posts-->
-                    <h2>work work work</h2>
-                  {%for post in object_list %}
-
-
-                  <div class="card mb-3">
-                      <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                      <div class="card-body">
-                          <div class="small text-muted">{{post.jalali_get_publish}}</div>
-                          <h2 class="card-title h4">{{post.title}}</h2>
-                          <p class="card-text">{{post.creator.first_name}}</p>
-                          <p class="card-text">{{post.descriptions | truncatewords:10}}</p>
-                            {%for cat in post.category.all%}
-                            <p class="card-text">#{{cat.title}}</p>
-                            {%endfor%}
-                          <a class="btn btn-primary" href="{%url 'blog:Details' post.slug%}">Read more →</a>
-                      </div>
-                  </div>
-
-                  {%endfor%}
-
-
-
-
-
-
-                <!-- Side widgets-->
-                <div class="col-lg-4">
-                    <!-- Search widget-->
-                    <!-- Categories widget-->
-                    <!-- Side widget-->
-                </div>
-            {% if page_obj.has_next %}
-                <a class="btn btn-primary mb-3" href="{% url "blog:category" category.slug  page_obj.next_page_number%}"> new &rarr;</a>
-            {% endif %}
-
-            {% if page_obj.has_previous %}
-            <a class="btn btn-primary mb-3 ml-3" href="{% url "blog:category" category.slug page_obj.previous_page_number %}"> previous post &larr;</a>
-            {% endif %}
-            </div>
-        </div>
+{%block url_next%}
+    {% url "blog:category" category.slug  page_obj.next_page_number%}      {% comment %} این یو ار ال برای پیش انییشن کتگوری است{% endcomment %}
 {%endblock%}
+
+
+
+
+{%block url_previous%}
+    {% url "blog:category" category.slug  page_obj.previous_page_number%}
+{%endblock%}
+
+
+
+
+

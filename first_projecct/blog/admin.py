@@ -32,6 +32,10 @@ def make_deactive(modeladmin,request,queryset):
     queryset.update(status=False)
 
 
+@admin.action(description="make category active")
+def make_active(modeladmin,request,queryset):
+    queryset.update(status=True)
+
 
 
 
@@ -58,7 +62,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     search_fields = ('title',)
     prepopulated_fields = { 'slug': ('title',)}
-    actions = [make_deactive]
+    actions = [make_deactive,make_active]
 
 
 admin.site.register(Category,CategoryAdmin)
