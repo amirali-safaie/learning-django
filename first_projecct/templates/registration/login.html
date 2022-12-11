@@ -1,6 +1,21 @@
- <form method="post">{% csrf_token %} {% comment %} سی اس ار اف توکن های جنگو برای مقابله با حملات  {% endcomment %}
-    {{form.as_p}}
-    <button typr="submit">login</button>
+{% load static %}
 
-</form>
 
+
+
+<!DOCTYPE html>
+
+<link rel="stylesheet" href="{%static "account/login.css"%}">
+
+<script src="{%static "account/login.js"%}"></script>
+
+
+
+<div class="container"> <div class="row"> <div class="col-md-6"> <div class="card"> {% comment %} سی اس ار اف توکن های جنگو برای مقابله با حملات  {% endcomment %}
+	<form  class="box" method="post">{% csrf_token %}
+	<h1>Login</h1>
+	<p class="text-muted"> Please enter your login and password!</p>  
+	{{form.username}}
+	{{form.password}} <a class="forgot text-muted" href="#">Forgot password?</a> <input type="submit"  name="" value="Login" href="#"> <div class="col-md-12"> 
+	</form> 
+</div>
