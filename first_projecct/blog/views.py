@@ -71,7 +71,7 @@ class Category_list(ListView):
 
 
 class author_list(ListView):
-    paginate_by = 5  # """پیچ انیشین صفجه کتگوری"""
+    paginate_by = 3  # """پیچ انیشین صفجه کتگوری"""
     template_name = "blog/author_list.html"   #نشان دادن این ویو بر روی این تمپلیت
 
     def get_queryset(self):

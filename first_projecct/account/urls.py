@@ -1,8 +1,15 @@
+from django.contrib.auth import views
 from django.urls import path
-from .views import *
+from .views import home,Home
 
-app_name = "account"
+app_name="account"
+
+
 urlpatterns = [
-    path('login_user/',login_user,name="login_user"),
-    path('logout_user/',logout_user,name="logout_user"),
+    path("login/", views.LoginView.as_view(), name="login"),
+]
+
+urlpatterns+=[
+    # path("",home,name="home"),
+    path("",Home.as_view(),name="home")
 ]
