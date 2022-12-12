@@ -41,6 +41,7 @@ INSTALLED_APPS = [    #لیست اپ های پروژه
     'blog.apps.BlogConfig',   #اضافه فکردن اپ بلاگ به اپ های پروژ]
     'account.apps.AccountConfig', # اضافه کردن اپ اکانت به اپ های پروژه
     'extensions',
+
 ]
 
 MIDDLEWARE = [

@@ -1,17 +1,53 @@
 {%load static%}
 
+
 <!DOCTYPE html>
 <link rel="stylesheet" href="{%static "account/login.css"%}">
 <body>
+	{% if form.non_field_errors%}
+	<div class="errors">
+		{%for error in form.non_field_errors%}
+			<span>{{error}}</span>
+		{%endfor%}
+	</div>
+	{%endif%}
+
+	
+
+
 
 	<div class="login">
+
 	<form method="post"> {% csrf_token %} 
 		{{form.username}}
-		{{form.password}}
+		{% if form.username.errors%}
+		<div class="errors">
+			{%for error in form.username.errors%}
+				<span>{{error}}</span>
+			{%endfor%}
+		</div>
+		{%endif%}
+
+
+
+
+
+
+
+		{{form.password}}   
+		{% if form.password.errors%}
+		<div class="errors">
+			{%for error in form.password.errors%}
+				<span>{{error}}</span>
+			{%endfor%}
+		</div>
+		{%endif%}
+
+
+
 		<input type="submit" value="Sign In">
 	</form>
 	
-	  <a href="#" class="forgot">forgot password?</a>
 
 	</div>
 	<div class="shadow"></div>
@@ -21,3 +57,4 @@
 
 
 
+ 
