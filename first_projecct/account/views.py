@@ -36,7 +36,7 @@ from blog.models import Article
 
 class Home(LoginRequiredMixin,ListView):
     queryset = Article.objects.published()  #گرفتن پست ها از مدل 
-    template_name="account/home.html" #این ویو چه تمپلیتی را نمایش دهد
+    template_name="registration/home.html" #این ویو چه تمپلیتی را نمایش دهد
 
 
 @login_required   #این دکریتور میگه اگر میخوای از این ویو استفاده کنی باید لاگ این کنی
