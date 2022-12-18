@@ -52,9 +52,7 @@ class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = { 'slug': ('title',)}
     actions = [make_publish,make_draf]
 
-    def category_to_str(self,obj):
-        return ", ".join(category.title for category in obj.category.active())
-    category_to_str.short_description = "category"
+
 
 admin.site.register(Article,ArticleAdmin)
 

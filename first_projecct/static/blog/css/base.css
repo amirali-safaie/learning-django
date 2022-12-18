@@ -639,6 +639,7 @@ progress {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+  background-image: url("");
 }
 
 @media (min-width: 576px) {
@@ -11294,4 +11295,7 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+img{
+    width:500px !important;
 }

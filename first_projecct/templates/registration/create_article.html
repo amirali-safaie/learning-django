@@ -1,0 +1,14 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}
+    create article
+{% endblock %}
+
+
+{% block main %}
+ <form method="post">{%csrf_token%} {% comment %} ارسال اطلاعات از طریق متد پست و تگ فرم   {% endcomment %}
+
+    {{form.as_p}}       {% comment %} این فرم رو خود جنگو میسازه از ویو کریت ارتیکل و میزاره ما اطلاعات رو بفرستم روی مدل ها {% endcomment %}
+    <button class="btn btn-success"> send article </button>
+</form>
+{% endblock %}

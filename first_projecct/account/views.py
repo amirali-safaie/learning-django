@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.views.generic import ListView,CreateView
 from blog.models import Article
 # from django.http import HttpResponse
 # from django.contrib.auth import authenticate,login,logout
@@ -35,10 +35,22 @@ from blog.models import Article
 #     return redirect('account:login_user')
 
 class Home(LoginRequiredMixin,ListView):
-    queryset = Article.objects.published()  #گرفتن پست ها از مدل 
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Article.objects.all()  #گرفتن پست ها از مدل 
+        else:
+            return Article.objects.filter(author = self.request.user)
     template_name="registration/home.html" #این ویو چه تمپلیتی را نمایش دهد
 
 
 # @login_required   #این دکریتور میگه اگر میخوای از این ویو استفاده کنی باید لاگ این کنی
 # def home(request):
 #     return render(request,"registration/home.html")
+
+
+class Create(LoginRequiredMixin,CreateView):
+    model = Article
+    fields = ["author","title","slug","category","publish","status","descriptions"]
+    template_name = "registration/create_article.html"
+

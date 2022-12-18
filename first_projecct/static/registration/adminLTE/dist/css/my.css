@@ -1,0 +1,19 @@
+.my{
+    background-color: rgb(221, 221, 221) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+h5{
+    display: flex;
+    align-items: center;
+}
+.cont{
+    margin-left: 50px;
+    max-width: 1000px;
+}
+/* form{
+    margin-left: 20px !important;
+    background-color: black;
+} */

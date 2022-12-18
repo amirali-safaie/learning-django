@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 from extensions.utils import jalali_converter
@@ -10,7 +11,7 @@ class PostManager(models.Manager): #درست کردن منیجیر برای نم
     def published(self):
         return self.filter(status="p")
 
-class categorytManager(models.Manager):#درست کردن منیجیر برای نمایش دسته بندی  های فعال
+class CategorytManager(models.Manager):#درست کردن منیجیر برای نمایش دسته بندی  های فعال
     def active(self):
         return self.filter(status=True)
 
@@ -35,7 +36,7 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
-    objects = categorytManager()
+    objects = CategorytManager()
 
 #category class ...............
 
@@ -63,6 +64,10 @@ class Article(models.Model):
 
     class Meta:
         ordering = ["-publish"]
+    
+    def get_absolute_url(self):  #این تابع میگوید در ویو درست کردن ارتیکل در اپ اکانت بعد از تشکیل ارتیکل سایت به کدام ادرس برود
+        return reverse("account:home")  #ریورس معلوم میکند که این استرینگ یو ار ال است
+    
 
     def jalali_get_publish(self):
          return jalali_converter(self.publish)
@@ -71,6 +76,11 @@ class Article(models.Model):
 
     def show_category(self):
         return self.category.active()
+
+    def category_to_str(self):
+        return ", ".join([category.title for category in self.category.active()])
+    category_to_str.short_description = "category"  # این اطلاعات را با چه تایتلی در پنل ادمین نشان دهد
+
 
     def __str__(self):
         return self.title
