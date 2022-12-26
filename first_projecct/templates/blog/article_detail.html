@@ -25,7 +25,7 @@
 
               <div class="container"  id="cont" width="200">
                 <h2>{{object.title}}</h2>
-                <p>{{object.descriptions | linebreaks}}</p>
+                <p>{{object.descriptions|striptags | linebreaks}}</p>
                 <p>{{object.category.title}}</p>
                 <p>{{object.jalali_get_publish}}</p>
 

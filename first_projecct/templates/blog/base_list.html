@@ -29,7 +29,7 @@
                           <div class="small text-muted">{{post.jalali_get_publish}}</div>
                           <h2 class="card-title h4">{{post.title}}</h2>
                           <p class="card-text">{{post.creator.first_name}}</p>
-                          <p class="card-text">{{post.descriptions | truncatewords:10}}</p>
+                          <p class="card-text">{{post.descriptions|striptags | truncatewords:10}}</p>
                             {%for cat in post.category.active%}
                             <a href='{%url "blog:category" cat.slug%}'><p class="card-text">#{{cat.title}}</p></a> <br>
                             {%endfor%}

@@ -10,10 +10,7 @@ h5{
     align-items: center;
 }
 .cont{
+    background-color: gray;
     margin-left: 50px;
-    max-width: 1000px;
 }
-/* form{
-    margin-left: 20px !important;
-    background-color: black;
-} */
+

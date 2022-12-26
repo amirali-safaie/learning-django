@@ -41,8 +41,13 @@ INSTALLED_APPS = [    #لیست اپ های پروژه
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',   #اضافه فکردن اپ بلاگ به اپ های پروژ]
     'account.apps.AccountConfig', # اضافه کردن اپ اکانت به اپ های پروژه
+    'crispy_forms',
+    'crispy_bootstrap5',
     'extensions',
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -130,3 +135,10 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+AUTH_USER_MODEL = "account.User" #تعیین کردم از چه مدلی برای یوزر ها در سایت استفاده کنه
+
