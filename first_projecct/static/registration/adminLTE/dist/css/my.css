@@ -10,7 +10,7 @@ h5{
     align-items: center;
 }
 .cont{
-    background-color: gray;
-    margin-left: 50px;
+    margin-left: 25px;
+    max-width: 1040px;
 }
 

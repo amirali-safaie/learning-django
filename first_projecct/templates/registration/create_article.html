@@ -17,28 +17,30 @@
     <!-- form start -->
     <form method="post">{%csrf_token%}
       <div class="card-body">
+        {%if request.user.is_superuser%}
         <div class='row'>
             <div class='col-1'>
                 {{form.author|as_crispy_field}}
             </div>
+            <div class='col-6'>
+                {{form.status|as_crispy_field}}
+            </div>
+        </div>
+        {%endif%}
+        <div class='row'>
             <div class='col-3 ml-5'>
                 {{form.title|as_crispy_field}}
             </div>
-        </div>
-        <div class='row'>
             <div class='col-4'>
                 {{form.slug|as_crispy_field}}
             </div>
-            <div class='col-4'>
-                {{form.publish|as_crispy_field}}
-            </div>
         </div>
         <div class='row'>
-            <div class='col-6'>
+            <div class='col-4'>
                 {{form.category|as_crispy_field}}
             </div>
-            <div class='col-6'>
-                {{form.status|as_crispy_field}}
+            <div class='col-4'>
+                {{form.publish|as_crispy_field}}
             </div>
         </div>
         <div class='row'>

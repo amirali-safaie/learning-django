@@ -27,13 +27,13 @@
                       <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                       <div class="card-body">
                           <div class="small text-muted">{{post.jalali_get_publish}}</div>
+                      </br>
                           <h2 class="card-title h4">{{post.title}}</h2>
-                          <p class="card-text">{{post.creator.first_name}}</p>
                           <p class="card-text">{{post.descriptions|striptags | truncatewords:10}}</p>
                             {%for cat in post.category.active%}
                             <a href='{%url "blog:category" cat.slug%}'><p class="card-text">#{{cat.title}}</p></a> <br>
                             {%endfor%}
-                            <a href='{%url "blog:author" post.author%}'><p class="card-text">{{post.author.get_full_name}}</p></a> <br>
+                            <a href='{%url "blog:author" post.author%}'><p class="card-text">{{post.author}}</p></a> <br>
                           <a class="btn btn-primary" href="{%url 'blog:Details' post.slug%}">Read more →</a>
                       </div>
                   </div>

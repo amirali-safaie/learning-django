@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .mixins import FieldMixin,FormValidMixin
 from django.views.generic import ListView,CreateView
 from blog.models import Article
 # from django.http import HttpResponse
@@ -49,8 +50,7 @@ class Home(LoginRequiredMixin,ListView):
 #     return render(request,"registration/home.html")
 
 
-class Create(LoginRequiredMixin,CreateView):
+class Create(LoginRequiredMixin,FieldMixin,FormValidMixin,CreateView):#این ویو برای وارد کردن اطلاعات توی مدلِ ( نوشتن مقاله )
     model = Article
-    fields = ["author","title","slug","category","publish","status","descriptions"]
     template_name = "registration/create_article.html"
 
