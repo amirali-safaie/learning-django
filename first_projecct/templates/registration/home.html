@@ -19,15 +19,14 @@
           <th>status</th>
         </tr>
         </thead>
-
         {%for article in object_list%}     {% comment %} نمایش مقالات در صفحه ادمین خودمون object_list به صورت پیش فرض برای کلس بیس ویو ها هستش{% endcomment %}
         <tr>
-            <td>
-                {% if article.status == 'p' %}
-                    <a href="{% url 'blog:Details' article.slug %}">{{article.title}}</a>
-                {% else %}
-                <a href="#">{{article.title}}</a>
-                {% endif %}
+            <td>                
+                 {% if article.status == 'd' or request.user.is_superuser%} {% comment %} اگر مقاله پیش نویس بود بشه ادیتش کرد یا اینکه طرف سوپر یوزر باشه و ادیت کنه {% endcomment %}
+                <a href="{% url 'account:update' article.pk %}">{{article.title}}</a>
+                {%else%}
+                {{article.title}}
+                {%endif%}
             </td>
             <td>{{article.author}}</td>
             <td>{{article.slug}}</td>

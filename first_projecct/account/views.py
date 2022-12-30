@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import FieldMixin,FormValidMixin
-from django.views.generic import ListView,CreateView
+from .mixins import FieldMixin,FormValidMixin,AuthorAccessUpdate
+from django.views.generic import ListView,CreateView,UpdateView
 from blog.models import Article
 # from django.http import HttpResponse
 # from django.contrib.auth import authenticate,login,logout
@@ -54,3 +54,8 @@ class Create(LoginRequiredMixin,FieldMixin,FormValidMixin,CreateView):#این و
     model = Article
     template_name = "registration/create_article.html"
 
+
+class Update(AuthorAccessUpdate,FieldMixin,FormValidMixin,UpdateView):
+    """این ویو برای اپدیت و ادیت مقالات نوشته شده"""
+    model = Article
+    template_name = "registration/create_article.html"
