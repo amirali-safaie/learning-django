@@ -4,7 +4,7 @@
 
 {%block main%}
 <div class="my">
-    <h5  class="m-0" >welcome {{user.get_full_name}}</p> 
+    <h5  class="m-0" >welcome {{user.get_full_name}}</p>
 </div>
 
 <div class="cont">
@@ -21,7 +21,7 @@
         </thead>
         {%for article in object_list%}     {% comment %} نمایش مقالات در صفحه ادمین خودمون object_list به صورت پیش فرض برای کلس بیس ویو ها هستش{% endcomment %}
         <tr>
-            <td>                
+            <td>
                  {% if article.status == 'd' or request.user.is_superuser%} {% comment %} اگر مقاله پیش نویس بود بشه ادیتش کرد یا اینکه طرف سوپر یوزر باشه و ادیت کنه {% endcomment %}
                 <a href="{% url 'account:update' article.pk %}">{{article.title}}</a>
                 {%else%}
@@ -41,6 +41,9 @@
                     <span class="badge badge-danger"> draft</span>
                 {% endif %}
 
+                {% if request.user.is_superuser %}
+                    <span><a href="{% url 'account:delete' article.pk %}">delete</a></span> <!--  لینک پاک کردن  مقاله  -->
+                {% endif %}
             </td>
 
         </tr>

@@ -1,0 +1,43 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}  <!--لود کریس پای برای استایل دهی به فرم های جنگو-->
+
+{% block title %}
+    delete article
+{% endblock %}
+
+
+{% block main %}
+
+<div class=" col-mid-8 text-center mx_auto">
+
+
+<div class="card card-danger text-center ">
+    <div class="card-header text-center">
+      <h3 class="card-title">delete article</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form method="post" class="text-center">{%csrf_token%}
+      <div class="card-body">
+          <form method="post"> {%csrf_token%}
+              <p class="">are you sure  you wanna delete it {{article.title}}?</p>
+              <input type="submit" name="" value="confirm" class="btn btn-danger">
+          </form>
+      </div>
+      <!-- /.card-body -->
+    </form>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
