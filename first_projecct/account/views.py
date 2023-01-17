@@ -118,8 +118,6 @@ class Delete(Superuseraccess,DeleteView):
     model = Article
     success_url = reverse_lazy("account:home")
     template_name = "registration/delete_article.html"
-# def home(request):
-#     return render(request,"registration/home.html")
 
 
 class Create(LoginRequiredMixin,FieldMixin,FormValidMixin,CreateView):#این ویو برای وارد کردن اطلاعات توی مدلِ ( نوشتن مقاله )

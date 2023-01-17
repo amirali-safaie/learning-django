@@ -1,8 +1,10 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <a class="nav-link " href="{% url "account:logout" %}" role="button"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
         <li class="nav-item"><a class="nav-link" href="{%url 'blog:home'%}">Home</a></li>
         {% comment %} <li class="nav-item"><a class="nav-link" href="{%url 'account:logout_user' %}">logout</a></li> {% endcomment %}
         <li class="nav-item"><a class="nav-link" aria-current="page" href="{%url "blog:home"%}">Blog</a></li>
+        
         {%for cat in category%}
             {%if cat.parent == None%}
                 <li class="nav-item">

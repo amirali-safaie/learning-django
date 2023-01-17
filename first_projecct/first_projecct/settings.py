@@ -16,6 +16,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOGIN_REDIRECT_URL = "account:home" #ادرس صفحه که بعد از لاگ این شدن نمایش داده میشه
+LOGOUT_REDIRECT_URL = "account:login" #آدرس صفحه ای که بعد از لاگ اوت شدن نمایش داده میشه
 LOGIN_URL = "account:login" #صفحه که اگر لاگ این نباشیم و صفحه ای بخوایم باز گنیم لاگ این نیاز داره برای لاگ این شدن نمایش میده
 
 # Quick-start development settings - unsuitable for production

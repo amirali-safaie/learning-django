@@ -7,7 +7,9 @@
     <h5  class="m-0" >welcome {{user.get_full_name}}</p>
 </div>
 
-<div class="cont">
+
+{%if object_list%}
+    <div class="cont">
     <table class="table">
         <thead>
         <tr>
@@ -16,7 +18,7 @@
           <th>slug</th>
           <th>categorys</th>
           <th>date</th>
-          <th>status</th>
+          <th class="text-center">status</th>
         </tr>
         </thead>
         {%for article in object_list%}     {% comment %} نمایش مقالات در صفحه ادمین خودمون object_list به صورت پیش فرض برای کلس بیس ویو ها هستش{% endcomment %}
@@ -34,20 +36,30 @@
                 <div class="sparkbar" data-color="#00a65a" data-height="20">{{article.category_to_str}}</div>
             </td>
             <td>{{article.jalali_get_publish}}</td>
-            <td>
+
+
+            <td class="mx-auto text-center">
+
+                {% if request.user.is_superuser %}
+                <form method="post" action={%url "account:delete" article.pk%}> {%csrf_token%}
+                    <input type="submit" name="" value="delete this article" class="btn btn-danger p-1"> <!--  لینک پاک کردن  مقاله  -->
+                </form>
+            
+                {% endif %}
+
                 {%if article.status == "p"%}
                     <span class="badge badge-success"> published</span>
                 {%else%}
-                    <span class="badge badge-danger"> draft</span>
+                    <span class="badge badge-primary"> draft</span>
                 {% endif %}
 
-                {% if request.user.is_superuser %}
-                    <span><a href="{% url 'account:delete' article.pk %}">delete</a></span> <!--  لینک پاک کردن  مقاله  -->
-                {% endif %}
             </td>
 
         </tr>
         {%endfor%}
       </table>
-</div>
+    </div>
+{%else%}
+    <h3>there is nothing to show ...</h3>
+{%endif%}
 {%endblock%}
