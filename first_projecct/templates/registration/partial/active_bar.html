@@ -1,0 +1,21 @@
+{% comment %} این تیمپلیت تگ برای اکتیو باره یعنی  روی هر منو که کلیک کردیم مثلا سفید بشه {% endcomment %}
+
+
+
+<li class="nav-item">
+
+    <a 
+    href="{%url link%}" 
+    
+    class="nav-link {% if request.resolver_match.url_name == link_name %}
+    
+    active
+    
+    {% endif %}"
+    
+    >
+
+      <i class="nav-icon fas"></i>
+      <p>{{content}}</p>
+    </a>
+</li>

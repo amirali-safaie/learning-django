@@ -1,4 +1,11 @@
-  <!-- Main Sidebar Container -->
+{%load static%}
+{%load base_tag%}
+
+
+
+
+ 
+ <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -40,18 +47,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{%url 'account:create'%}" class="nav-link active">
-                  <i class="nav-icon fas fa-edit"></i>
-                  <p>write new one</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>profile</p>
-                </a>
-              </li>
+
+
+
+              {%active_bar request "home" "list of articles"%}
+
+
+              {% active_bar request "create" "write new one"%}
+
               <li class="nav-item">
                 <a href="./index3.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
