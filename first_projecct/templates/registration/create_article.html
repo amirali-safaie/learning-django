@@ -53,7 +53,14 @@
 
       <div class="card-footer">
         <button type="submit" class="btn btn-primary">Submit</button>
+
+        {% if user.is_superuser and request.resolver_match.kwargs.pk %}
+
+        <a href="{% url "account:delete" article.pk %}" class="btn btn-danger">delete</a>
+
+        {% endif %}
       </div>
+
     </form>
   </div>
 

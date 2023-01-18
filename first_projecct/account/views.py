@@ -1,8 +1,8 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixins import FieldMixin,FormValidMixin,AuthorAccessUpdate
-from django.views.generic import ListView,CreateView,UpdateView
+from django.views.generic import ListView,CreateView,UpdateView,DeleteView,DetailView
 from blog.models import Article
 # from django.http import HttpResponse
 # from django.contrib.auth import authenticate,login,logout
@@ -120,12 +120,10 @@ class Delete(Superuseraccess,DeleteView):
     template_name = "registration/delete_article.html"
 
 
-class Create(LoginRequiredMixin,FieldMixin,FormValidMixin,CreateView):#این ویو برای وارد کردن اطلاعات توی مدلِ ( نوشتن مقاله )
+class Preview(AuthorAccessUpdate,DetailView):
+    """این ویو برای دیدن پریویو پست هایی که میخوایم نمیایش بدیم"""
+    # def get_object(self):
+    #     pk = self.kwargs.get("pk")
+    #     return get_object_or_404(Article,pk=pk)#خودش میره دنبلا تمپلیتی که از ترکیب دیتیل و ارتیکل باشه
     model = Article
-    template_name = "registration/create_article.html"
-
-
-class Update(AuthorAccessUpdate,FieldMixin,FormValidMixin,UpdateView):
-    """این ویو برای اپدیت و ادیت مقالات نوشته شده"""
-    model = Article
-    template_name = "registration/create_article.html"
+        

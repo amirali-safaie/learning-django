@@ -24,7 +24,7 @@
         {%for article in object_list%}     {% comment %} نمایش مقالات در صفحه ادمین خودمون object_list به صورت پیش فرض برای کلس بیس ویو ها هستش{% endcomment %}
         <tr>
             <td>
-                 {% if article.status == 'd' or request.user.is_superuser%} {% comment %} اگر مقاله پیش نویس بود بشه ادیتش کرد یا اینکه طرف سوپر یوزر باشه و ادیت کنه {% endcomment %}
+                {% if article.status == 'db'|make_list or request.user.is_superuser%} {% comment %} اگر مقاله پیش نویس بود بشه ادیتش کرد یا اینکه طرف سوپر یوزر باشه و ادیت کنه {% endcomment %}
                 <a href="{% url 'account:update' article.pk %}">{{article.title}}</a>
                 {%else%}
                 {{article.title}}
@@ -47,10 +47,23 @@
             
                 {% endif %}
 
-                {%if article.status == "p"%}
+                
+
+                {%if article.status == 'p'%}
                     <span class="badge badge-success"> published</span>
-                {%else%}
-                    <span class="badge badge-primary"> draft</span>
+                {%elif article.status == 'd'%}
+
+                   <a href="{% url "account:preview" article.pk %}" class="badge badge-primary"> preview of post in site</a><!--  لینک دیدن پیش نمایش مقاله -->
+                   </br>
+                   <span class="badge badge-primary">draft</span>
+
+                {%elif article.status == "i"%}
+                <span class="badge badge-secondary">pending</span>
+
+                {%elif article.status == "b"%}
+                <span class="badge badge-warning">backed</span>
+
+
                 {% endif %}
 
             </td>

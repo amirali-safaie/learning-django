@@ -48,7 +48,9 @@ class Category(models.Model):
 class Article(models.Model):
     STATUS_CHOICES=(
         ('d','draft'),
-        ("p",'publish')
+        ("p",'publish'),
+        ("i","pendeing"),#در دست برسی
+        ("b","back")#خانواده شده برگشت داده شده
     )
 
     author = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,related_name="posts_of_author")# اختصاص دادن یک نویسدنده برای پست
