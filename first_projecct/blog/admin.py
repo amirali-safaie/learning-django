@@ -8,7 +8,7 @@ def make_publish(modeladmin,request,queryset):
     if rows_update == 1:
         message_bit = "1 post published"
     else:
-        message_bit = "%s post publihsed" %rows_update
+        message_bit = "%s posts publihsed" %rows_update
     
     modeladmin.message_user(request,"%s " %message_bit)
 
@@ -46,7 +46,7 @@ def make_active(modeladmin,request,queryset):
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ("title","slug",'jalali_get_publish',"author",'status','category_to_str')
+    list_display = ("title","slug",'jalali_get_publish',"author","is_special",'status','category_to_str')
     list_filter = ('publish','status')
     search_fields = ('title','descriptions')
     prepopulated_fields = { 'slug': ('title',)}

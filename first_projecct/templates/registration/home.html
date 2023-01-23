@@ -14,10 +14,11 @@
         <thead>
         <tr>
           <th>title</th>
-          <th>author</th>
-          <th>slug</th>
-          <th>categorys</th>
-          <th>date</th>
+          <th class="text-center">author</th>
+          <th class="text-center">slug</th>
+          <th class="text-center">is special</th>
+          <th class="text-center">categorys</th>
+          <th class="text-center">date</th>
           <th class="text-center">status</th>
         </tr>
         </thead>
@@ -30,12 +31,20 @@
                 {{article.title}}
                 {%endif%}
             </td>
-            <td>{{article.author}}</td>
-            <td>{{article.slug}}</td>
-            <td>
+            <td class="text-center">{{article.author}}</td>
+            <td class="text-center">{{article.slug}}</td>
+            <td class="text-center">
+                {% if article.is_special %}
+                    <i class = "fa fa-check-circle" style="color:green"></i>
+
+                {%else%}
+                <i class = "fa fa-minus-circle" style="color:red"></i>
+                {% endif %}
+            </td>
+            <td class="text-center">
                 <div class="sparkbar" data-color="#00a65a" data-height="20">{{article.category_to_str}}</div>
             </td>
-            <td>{{article.jalali_get_publish}}</td>
+            <td class="text-center">{{article.jalali_get_publish}}</td>
 
 
             <td class="mx-auto text-center">

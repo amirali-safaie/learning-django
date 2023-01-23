@@ -11,6 +11,14 @@ class PostManager(models.Manager): #درست کردن منیجیر برای نم
     def published(self):
         return self.filter(status="p")
 
+    def not_special(self):
+        return self.filter(is_special=False,status='p')
+
+
+# class PostManager(models.Manager): #درست کردن منیجیر برای نمایش مقاله های پابلیش
+#     def not_special(self):
+#         return self.filter(is_special=False,status='p')
+
 class CategorytManager(models.Manager):#درست کردن منیجیر برای نمایش دسته بندی  های فعال
     def active(self):
         return self.filter(status=True)
@@ -61,6 +69,7 @@ class Article(models.Model):
     publish= models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    is_special = models.BooleanField(default=False,verbose_name="special post")
     status = models.CharField(max_length=1,choices=STATUS_CHOICES)
 
 

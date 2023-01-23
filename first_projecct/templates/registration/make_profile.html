@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}  <!--لود کریس پای برای استایل دهی به فرم های جنگو-->
 
 {% block title %}
-    create article
+    profile
 {% endblock %}
 
 
@@ -11,7 +11,7 @@
 
 <div class="card card-primary">
     <div class="card-header">
-      <h3 class="card-title">info of article</h3>
+      <h3 class="card-title">info of profile</h3>
     </div>
     <!-- /.card-header -->
     <!-- form start -->
@@ -19,49 +19,39 @@
       <div class="card-body">
         {%if request.user.is_superuser%}
         <div class='row'>
-            <div class='col-1'>
-                {{form.author|as_crispy_field}}
+            <div class='col-6'>
+                {{form.username|as_crispy_field}}
             </div>
             <div class='col-6'>
-                {{form.status|as_crispy_field}}
+                {{form.email|as_crispy_field}}
             </div>
         </div>
         {%endif%}
         <div class='row'>
-            <div class='col-3 ml-5'>
-                {{form.title|as_crispy_field}}
+            <div class='col-3'>
+                {{form.first_name|as_crispy_field}}
             </div>
             <div class='col-4'>
-                {{form.slug|as_crispy_field}}
+                {{form.last_name|as_crispy_field}}
             </div>
         </div>
         <div class='row'>
             <div class='col-4'>
-                {{form.category|as_crispy_field}}
-            </div>
-            <div class='col-4'>
-                {{form.publish|as_crispy_field}}
+                {{form.special_user|as_crispy_field}}
             </div>
         </div>
-        <div class='row'>
-            <div class='col-9'>
-                {{form.is_special|as_crispy_field}}
-            </div>
-
-
-            <div class='col-9'>
-                {{form.descriptions|as_crispy_field}}
-            </div>
-         </div>
+        <div class='col-4'>
+            {{form.is_author|as_crispy_field}}
+        </div>
       </div>
       <!-- /.card-body -->
 
       <div class="card-footer">
         <button type="submit" class="btn btn-primary">Submit</button>
 
-        {% if user.is_superuser and request.resolver_match.kwargs.pk %}
+        {% if user.is_superuser %}
 
-        <a href="{% url "account:delete" article.pk %}" class="btn btn-danger">delete</a>
+        {% comment %} <a href="{% url "account:delete" article.pk %}" class="btn btn-danger">delete</a> {% endcomment %}
 
         {% endif %}
       </div>

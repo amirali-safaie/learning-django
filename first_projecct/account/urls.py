@@ -1,6 +1,6 @@
 from django.contrib.auth import views
 from django.urls import path
-from .views import Home,Create,Update,Delete,Preview
+from .views import Home,Create,Update,Delete,Preview,MakeProfile
 
 app_name="account"
 
@@ -17,4 +17,5 @@ urlpatterns+=[
     path("update_article/<int:pk>",Update.as_view(),name="update"), #pk پرایمری کی توی دیتابیس برای هر مقاله
     path("delete_article/<int:pk>",Delete.as_view(),name="delete"), #pk پرایمری کی توی دیتابیس برای هر مقاله
     path("preview_article/<int:pk>",Preview.as_view(),name="preview"), #pk پرایمری کی توی دیتابیس برای هر مقاله
+    path("make_profile/",MakeProfile.as_view(),name="make_profile"), #pk پرایمری کی توی دیتابیس برای هر مقاله
 ]

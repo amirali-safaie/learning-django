@@ -9,7 +9,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <span class="brand-text font-weight-light">admin panel</span>
+      <span class=" ml-2 brand-text font-weight-light">admin panel</span>
     </a>
 
     <!-- Sidebar -->
@@ -18,6 +18,12 @@
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
           <a href="#" class="d-block">{{user.get_full_name}}</a>
+          {% if user.is_superuser %}
+              <a href="#" class="d-block">superuser</a>
+          {% elif user.is_author %}
+              <a href="#" class="d-block">author</a>
+
+          {% endif %}
         </div>
       </div>
 
@@ -56,9 +62,9 @@
               {% active_bar request "create" "write new one"%}
 
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
+                <a href="{%url "account:make_profile"%}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>categorys</p>
+                  <p>profile</p>
                 </a>
               </li>
             </ul>

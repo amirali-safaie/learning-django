@@ -1,9 +1,16 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import FieldMixin,FormValidMixin,AuthorAccessUpdate
-from django.views.generic import ListView,CreateView,UpdateView,DeleteView,DetailView
+from .mixins import FieldMixin,FormValidMixin,AuthorAccessUpdate,Superuseraccess
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+    DetailView
+)
 from blog.models import Article
+from .models import User
 # from django.http import HttpResponse
 # from django.contrib.auth import authenticate,login,logout
 # from django.contrib import messages
@@ -35,28 +42,9 @@ from blog.models import Article
 #     logout(request)
 #     return redirect('account:login_user')
 
-class Home(LoginRequiredMixin,ListView):
-
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            return Article.objects.all()  #گرفتن پست ها از مدل
-        else:
-            return Article.objects.filter(author = self.request.user)
-    template_name="registration/home.html" #این ویو چه تمپلیتی را نمایش دهد
 
 
 # @login_required   #این دکریتور میگه اگر میخوای از این ویو استفاده کنی باید لاگ این کنیfrom django.shortcuts import render,redirect
-from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import FieldMixin,FormValidMixin,AuthorAccessUpdate,Superuseraccess
-from django.views.generic import (
-    ListView,
-    CreateView,
-    UpdateView,
-    DeleteView
-)
-from blog.models import Article
 # from django.http import HttpResponse
 # from django.contrib.auth import authenticate,login,logout
 # from django.contrib import messages
@@ -127,3 +115,14 @@ class Preview(AuthorAccessUpdate,DetailView):
     #     return get_object_or_404(Article,pk=pk)#خودش میره دنبلا تمپلیتی که از ترکیب دیتیل و ارتیکل باشه
     model = Article
         
+
+class MakeProfile(UpdateView):
+    """این ویو برای درست کردن پروفایل کاربری نوشته شده"""
+    model = User  #از مدل یوزر که در اکانت درست کردیم استفاده میکنه که اونم از یوزر خود جنگو ارث بری میکنه
+    fields = ["username","email","first_name","last_name","special_user","is_author"]
+    template_name = "registration/make_profile.html"
+
+    success_url = reverse_lazy("account:home")
+
+    def get_object(self):
+        return User.objects.get(pk=self.request.user.pk) #پروفایل کسی رو بگیره که pk با pk یوزری که توی سایته برابر

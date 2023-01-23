@@ -7,9 +7,9 @@ class FieldMixin():
     """چه پستی هایی را در پنل ادمین خودم به چه کاربری نمایش بدم"""
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser :
-            self.fields = ["author","title","slug","category","publish","status","descriptions"]
+            self.fields = ["author","title","slug","category","publish","is_special","status","descriptions"]
         elif request.user.is_author:
-            self.fields = ["title","slug","category","publish","descriptions"]
+            self.fields = ["title","slug","category","publish","is_special","descriptions"]
         else:
             raise Http404
         return super().dispatch(request, *args, **kwargs)
