@@ -2,6 +2,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .mixins import FieldMixin,FormValidMixin,AuthorAccessUpdate,Superuseraccess
+from .forms import ProfileForm
 from django.views.generic import (
     ListView,
     CreateView,
@@ -119,10 +120,17 @@ class Preview(AuthorAccessUpdate,DetailView):
 class MakeProfile(UpdateView):
     """این ویو برای درست کردن پروفایل کاربری نوشته شده"""
     model = User  #از مدل یوزر که در اکانت درست کردیم استفاده میکنه که اونم از یوزر خود جنگو ارث بری میکنه
-    fields = ["username","email","first_name","last_name","special_user","is_author"]
+    form_class = ProfileForm
     template_name = "registration/make_profile.html"
 
     success_url = reverse_lazy("account:home")
 
     def get_object(self):
         return User.objects.get(pk=self.request.user.pk) #پروفایل کسی رو بگیره که pk با pk یوزری که توی سایته برابر
+
+    def get_form_kwargs(self):#تابع برای فرستادن یوزر به فرم  
+        kwrgs =  super(MakeProfile,self).get_form_kwargs() 
+        kwrgs.update({
+            "user":self.request.user
+        })
+        return kwrgs #فرستادن یوزر به عنوان عضوی از کی ورد ارگیومنت ها
