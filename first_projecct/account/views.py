@@ -1,7 +1,8 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import FieldMixin,FormValidMixin,AuthorAccessUpdate,Superuseraccess
+from django.contrib.auth.views import LoginView
+from .mixins import FieldMixin,FormValidMixin,AuthorAccessUpdate,Superuseraccess,Access
 from .forms import ProfileForm
 from django.views.generic import (
     ListView,
@@ -77,7 +78,7 @@ from .models import User
 #     logout(request)
 #     return redirect('account:login_user')
 
-class Home(LoginRequiredMixin,ListView):
+class Home(Access,ListView):
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -92,7 +93,7 @@ class Home(LoginRequiredMixin,ListView):
 #     return render(request,"registration/home.html")
 
 
-class Create(LoginRequiredMixin,FieldMixin,FormValidMixin,CreateView):#این ویو برای وارد کردن اطلاعات توی مدلِ ( نوشتن مقاله )
+class Create(Access,FieldMixin,FormValidMixin,CreateView):#این ویو برای وارد کردن اطلاعات توی مدلِ ( نوشتن مقاله )
     model = Article
     template_name = "registration/create_article.html"
 
@@ -117,7 +118,7 @@ class Preview(AuthorAccessUpdate,DetailView):
     model = Article
         
 
-class MakeProfile(UpdateView):
+class MakeProfile(LoginRequiredMixin,UpdateView):
     """این ویو برای درست کردن پروفایل کاربری نوشته شده"""
     model = User  #از مدل یوزر که در اکانت درست کردیم استفاده میکنه که اونم از یوزر خود جنگو ارث بری میکنه
     form_class = ProfileForm
@@ -134,3 +135,11 @@ class MakeProfile(UpdateView):
             "user":self.request.user
         })
         return kwrgs #فرستادن یوزر به عنوان عضوی از کی ورد ارگیومنت ها
+
+class Login(LoginView): #ویو لاگین ساختم از لاگین جنگو ارث بری کردم
+    def get_success_url(self):  # این متد میگه بعد از لاگین کردن کجا بریم 
+        user = self.request.user
+        if user.is_superuser or user.is_author:
+            return reverse_lazy("account:home")
+        else:
+            return reverse_lazy("account:make_profile")

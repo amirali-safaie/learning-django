@@ -12,7 +12,7 @@ UserAdmin.fieldsets[2][1]["fields"]=(     #hاضافه کردن فیلد های 
                                      "user_permissions",
                                      )
 
-UserAdmin.list_display += ("is_author","special_or_not")
+UserAdmin.list_display += ("is_author","special_or_not","is_superuser")
 
 admin.site.register(User, UserAdmin)
 

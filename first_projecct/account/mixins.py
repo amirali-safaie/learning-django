@@ -1,10 +1,10 @@
 from django.http import Http404
-from django.shortcuts import HttpResponse, render,get_object_or_404
+from django.shortcuts import HttpResponse, render,get_object_or_404,redirect
 from blog.models import Article
 
 
 class FieldMixin():
-    """چه پستی هایی را در پنل ادمین خودم به چه کاربری نمایش بدم"""
+    """چه فیلد هایی رو به چه نوع کاربر هایی نشون بده"""
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser :
             self.fields = ["author","title","slug","category","publish","is_special","status","descriptions"]
@@ -34,6 +34,16 @@ class AuthorAccessUpdate():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404("invalid url")
+
+class Access():
+    """کاربر به کجاها دسترسی داره و اگر به فلان یو ار ال دسترسی نداره کجا بره"""
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser or request.user.is_author:#
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect("account:make_profile")
+
+
 
 class Superuseraccess():
     """فقط سوپر یوزر بتونه یک پست رو پاک کنه"""
