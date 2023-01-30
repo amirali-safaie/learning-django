@@ -9,6 +9,7 @@
 {% block main %}
 
 
+
 <div class="card card-primary">
     <div class="card-header">
       <h3 class="card-title">info of article</h3>
@@ -19,16 +20,33 @@
       <div class="card-body">
         {%if request.user.is_superuser%}
         <div class='row'>
-            <div class='col-1'>
+            <div class='col-5'>
                 {{form.author|as_crispy_field}}
             </div>
             <div class='col-6'>
                 {{form.status|as_crispy_field}}
             </div>
         </div>
+        {%else%}
+        <div class="col-6">
+            <div id="div_id_status" class="mb-3">
+                <label for="id_status" class="form-label requiredField">
+                     Status<span class="asteriskField"></span>
+                </label>    
+
+                <select name="status" class="select form-select" required="" id="id_status">
+                    <option value="" selected="">---------</option>
+                    
+                    <option value="d">draft</option>
+
+                    <option value="i">pendeing</option>
+                </select>
+
+            </div>
+        </div>
         {%endif%}
         <div class='row'>
-            <div class='col-3 ml-5'>
+            <div class='col-3 ml-4'>
                 {{form.title|as_crispy_field}}
             </div>
             <div class='col-4'>
@@ -36,10 +54,10 @@
             </div>
         </div>
         <div class='row'>
-            <div class='col-4'>
+            <div class='col-5'>
                 {{form.category|as_crispy_field}}
             </div>
-            <div class='col-4'>
+            <div class='col-5'>
                 {{form.publish|as_crispy_field}}
             </div>
         </div>

@@ -23,12 +23,18 @@
                   {%for post in object_list%}
 
 
-                  <div class="card mb-3">
+                  <div class="card mb-4">
                       {% comment %} <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a> {% endcomment %}
                       <div class="card-body">
-                          <div class="small text-muted">{{post.jalali_get_publish}}</div>
-                      </br>
+                        <div>
+                          <span class="small text-muted">{{post.jalali_get_publish}}</span>
+                          {%if post.is_special%}
+                          <span class="badge badge-danger ml-10"> special post</span>
+                          {%endif%} 
+
+                        </div>
                           <h2 class="card-title h4">{{post.title}}</h2>
+ 
                           <p class="card-text">{{post.descriptions|striptags | truncatewords:10}}</p>
                             {%for cat in post.category.active%}
                             <a href='{%url "blog:category" cat.slug%}'><p class="card-text">#{{cat.title}}</p></a> <br>
@@ -52,7 +58,7 @@
                     <!-- Side widget-->
                 </div>
                 {% if page_obj.has_next %}
-                    <a class="btn btn-primary mb-3" href="{%block url_next%}{%endblock%}"> new &rarr;</a>
+                    <a class="btn btn-primary mb-3" href="{%block url_next%}{%endblock%}"> more &rarr;</a>
                 {% endif %}
 
                 {% if page_obj.has_previous %}

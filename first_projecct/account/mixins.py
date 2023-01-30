@@ -9,7 +9,7 @@ class FieldMixin():
         if request.user.is_superuser :
             self.fields = ["author","title","slug","category","publish","is_special","status","descriptions"]
         elif request.user.is_author:
-            self.fields = ["title","slug","category","publish","is_special","descriptions"]
+            self.fields = ["status","title","slug","category","publish","is_special","descriptions"]
         else:
             raise Http404
         return super().dispatch(request, *args, **kwargs)
@@ -22,7 +22,8 @@ class FormValidMixin():
         else:
             self.obj = form.save(commit = False)
             self.obj.author = self.request.user
-            self.obj.status = 'd'
+            if not self.obj.status == "i":
+                self.obj.status = "d"
         return super().form_valid(form)
 
 
@@ -38,10 +39,13 @@ class AuthorAccessUpdate():
 class Access():
     """کاربر به کجاها دسترسی داره و اگر به فلان یو ار ال دسترسی نداره کجا بره"""
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_superuser or request.user.is_author:#
-            return super().dispatch(request, *args, **kwargs)
-        else:
-            return redirect("account:make_profile")
+        if request.user.is_authenticated:   #اصلا کاربر لاگین این شده یا نه
+            if request.user.is_superuser or request.user.is_author:#
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                return redirect("account:make_profile")
+        else:#اگر لاگ این نشده
+                return redirect("account:login")
 
 
 
