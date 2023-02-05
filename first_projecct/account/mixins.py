@@ -45,7 +45,7 @@ class Access():
             else:
                 return redirect("account:make_profile")
         else:#اگر لاگ این نشده
-                return redirect("account:login")
+                return redirect("login")
 
 
 

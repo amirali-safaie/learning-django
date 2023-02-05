@@ -16,8 +16,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOGIN_REDIRECT_URL = "account:home" #ادرس صفحه که بعد از لاگ این شدن نمایش داده میشه
-LOGOUT_REDIRECT_URL = "account:login" #آدرس صفحه ای که بعد از لاگ اوت شدن نمایش داده میشه
-LOGIN_URL = "account:login" #صفحه که اگر لاگ این نباشیم و صفحه ای بخوایم باز گنیم لاگ این نیاز داره برای لاگ این شدن نمایش میده
+LOGOUT_REDIRECT_URL = "login" #آدرس صفحه ای که بعد از لاگ اوت شدن نمایش داده میشه
+LOGIN_URL = "login" #صفحه که اگر لاگ این نباشیم و صفحه ای بخوایم باز گنیم لاگ این نیاز داره برای لاگ این شدن نمایش میده
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -142,4 +142,16 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 AUTH_USER_MODEL = "account.User" #تعیین کردم از چه مدلی برای یوزر ها در سایت استفاده کنه
+
+
+
+
+# email setting ...............................
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "amirali.safa2004@gmail.com" # sender of email 
+EMAIL_HOST_PASSWORD = "rymo sddk elwm kzcq" # password of senders account
 

@@ -16,10 +16,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path,include
+from account.views import Login,ChangePassword
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include('blog.urls'),name='blog'),
-    path("account/",include('account.urls'),name='account')
+    path("account/",include('account.urls'),name='account'),
+    path("",include('django.contrib.auth.urls')),
+    path("login/", Login.as_view(), name="login"),
+    path("change_password/",ChangePassword.as_view(),name="change_password"), #یو ار ال تغییر پسورد
 ]

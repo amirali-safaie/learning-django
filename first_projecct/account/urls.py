@@ -7,18 +7,14 @@ from .views import (
     Delete,
     Preview,
     MakeProfile,
-    Login
+    Login,
+    ChangePassword
 )
 
 app_name="account"
 
 
-urlpatterns = [
-    path("login/", Login.as_view(), name="login"),
-    path("logout/", views.LogoutView.as_view(), name="logout")
-]
-
-urlpatterns+=[
+urlpatterns=[
     # path("",home,name="home"),
     path("",Home.as_view(),name="home"),
     path("create_article/",Create.as_view(),name="create"),

@@ -1,8 +1,15 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
-from .mixins import FieldMixin,FormValidMixin,AuthorAccessUpdate,Superuseraccess,Access
+from django.contrib.auth.views import LoginView,PasswordChangeView
+from .mixins import (
+    FieldMixin,
+    FormValidMixin,
+    AuthorAccessUpdate,
+    Superuseraccess,
+    Access
+)
 from .forms import ProfileForm
 from django.views.generic import (
     ListView,
@@ -136,10 +143,23 @@ class MakeProfile(LoginRequiredMixin,UpdateView):
         })
         return kwrgs #فرستادن یوزر به عنوان عضوی از کی ورد ارگیومنت ها
 
-class Login(LoginView): #ویو لاگین ساختم از لاگین جنگو ارث بری کردم
+class Login(LoginView):
+    """ویو لاگین ساختم از لاگین جنگو ارث بری کردم"""
     def get_success_url(self):  # این متد میگه بعد از لاگین کردن کجا بریم 
         user = self.request.user
         if user.is_superuser or user.is_author:
             return reverse_lazy("account:home")
         else:
             return reverse_lazy("account:make_profile")
+
+class ChangePassword(PasswordChangeView):
+    """ویو برای اینکه پسورد رو عوض کینم و از چینگ پسورد جنگو ارث بری میکنه"""
+
+    def form_valid(self, form):
+        form.save()
+        messages.success(self.request, "Your password has been changed.")
+        return super(PasswordChangeView, self).form_valid(form)
+
+
+    success_url = reverse_lazy("account:make_profile")
+    template_name = "registration/change_pass.html"

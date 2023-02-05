@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser #کلاس یوزر خود جنگو که قرار ما توش ی سری فیلد اضافه کنیم
 
 class User(AbstractUser):   #ارث بری از کلاس یوزر خود جنگو و ایجاد یوزر جدید برای استفاده توی پروژه
+    email =models.EmailField(unique=True) #change email field of user to uniq now anyone have to have a spec email
     is_author = models.BooleanField(default=False)
     special_user = models.DateTimeField(default=timezone.now)
 

@@ -1,0 +1,58 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}  <!--لود کریس پای برای استایل دهی به فرم های جنگو-->
+
+{% block title %}
+    change password
+{% endblock %}
+
+
+{% block main %}
+
+
+
+<div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">choose new pass</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form method="post">{%csrf_token%}
+      <div class="card-body">
+        <div class='row'>
+            <div class='col-5'>
+                {{form.old_password|as_crispy_field}}
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-9'>
+                {{form.new_password1|as_crispy_field}}
+            </div>
+
+
+            <div class='col-9'>
+                {{form.new_password2|as_crispy_field}}
+            </div>
+         </div>
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
