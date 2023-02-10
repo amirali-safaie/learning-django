@@ -15,8 +15,8 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path,include
-from account.views import Login,ChangePassword
+from django.urls import path,include,re_path
+from account.views import Login,ChangePassword,Register,activate
 
 
 
@@ -27,4 +27,9 @@ urlpatterns = [
     path("",include('django.contrib.auth.urls')),
     path("login/", Login.as_view(), name="login"),
     path("change_password/",ChangePassword.as_view(),name="change_password"), #یو ار ال تغییر پسورد
+
+
+    path("register/", Register.as_view(), name="register"),
+    re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',activate, name='activate'),
+    path('activate/<slug:uidb64>/<slug:token>/',activate, name='activate')
 ]

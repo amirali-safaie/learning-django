@@ -16,13 +16,16 @@
 	<h1>Login</h1>
 	<p class="text-muted"> Please enter your username and password!</p>  
 	{{form.username}}
-	{{form.password}}
+    {{form.email}}
+	{{form.password1}}
+    {{form.password2}}
+
 	
 	<label class="">
-		<a class="forgot text-muted" href="{%url 'password_reset' %}">Forgot password?</a> <input type="submit"  name="" value="Login" >  
+		<a class="forgot text-muted" href="{%url 'password_reset' %}">Forgot password?</a>
+         <input type="submit"  name="" value="signup" >  
 	</label>
 	<div class="col-md-12">
 	</form> 
 
-	<label><a href="{%url "register" %}">register</a></label>
 </div>
