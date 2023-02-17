@@ -45,6 +45,7 @@ INSTALLED_APPS = [    #لیست اپ های پروژه
     'crispy_forms',
     'crispy_bootstrap5',
     'extensions',
+    'comment'
 ]
 
 

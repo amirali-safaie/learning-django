@@ -1,5 +1,5 @@
 {%extends 'blog/base.html'%}
-
+{% load comment_tags %} 
 
 {%block title%} {{post_detail.title}} {%endblock%}
 {%block main%}
@@ -23,14 +23,22 @@
 
       <center>
 
-              <div class="container"  id="cont" width="200">
-                <h2>{{object.title}}</h2>
-                <p>{{object.descriptions|striptags | linebreaks }}</p>
-                <p>{{object.category.title}}</p>
-                <p>{{object.jalali_get_publish}}</p>
+            <div class="container"  id="cont">
+                  <h2>{{object.title}}</h2>
+                  <p>{{object.descriptions|striptags | linebreaks }}</p>
+                  <p>{{object.category.title}}</p>
+                  <p>{{object.jalali_get_publish}}</p>
+                  
+            
+            </div>
 
-              </div>
-                <br>
+            <div id="cont" style="width:650px;">
+                  {% render_comments object request %} 
+                  {% include_bootstrap %} 
+            </div>
+
+
+            <br>
 
 
       </center>

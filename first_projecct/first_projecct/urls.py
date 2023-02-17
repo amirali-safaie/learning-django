@@ -22,6 +22,7 @@ from account.views import Login,ChangePassword,Register,activate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('comment/', include('comment.urls')),
     path("",include('blog.urls'),name='blog'),
     path("account/",include('account.urls'),name='account'),
     path("",include('django.contrib.auth.urls')),

@@ -3,6 +3,8 @@ from django.urls import reverse
 from django.utils import timezone
 from account.models import User
 from extensions.utils import jalali_converter
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 
 #make manager ...................
@@ -71,6 +73,7 @@ class Article(models.Model):
     updated = models.DateTimeField(auto_now=True)
     is_special = models.BooleanField(default=False,verbose_name="special post")
     status = models.CharField(max_length=1,choices=STATUS_CHOICES)
+    comments = GenericRelation(Comment)
 
 
     class Meta:
